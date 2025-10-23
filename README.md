@@ -263,9 +263,10 @@ If you’re not familiar with Git:
 
 <p align="center">
   <a href="https://github.com/Krishnarajan7/DevVerse/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=Krishnarajan7/DevVerse" alt="contributors"/>
+    <img src="https://contrib.rocks/image?repo=Krishnarajan7/DevVerse&nocache=true" alt="contributors"/>
   </a>
 </p>
+
 
 ---
 
