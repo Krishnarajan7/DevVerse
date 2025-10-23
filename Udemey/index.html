@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Udemey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap" rel="stylesheet">
+
+    <!--Tittle Icon-->
+    <link rel="shortcut icon" href="images/tittle.png" type="image/x-icon">
+
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!--My Stylesheet-->
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+    <!-- This Popup Message -->
+  <div> 
+    <div class="popup">
+     
+          <div class="popup__content">
+             <h3>AI is changing the game| Get the skills with Udemy Business.</h3>
+            <p>Get access to 30,000+ top courses with Udemy Business.</p>
+     
+      </div>
+
+       <i id="close" class="fa-solid fa-xmark " style="color: #ffffff;"></i>
+ 
+
+    </div>
+
+  </div>
+
+    <!-- This Navbar Udemy-->
+    <div class="navbar">
+        <div class="navbar__logo">
+            <img src="images/logo-udemy.svg" alt="">
+        </div>
+
+
+        <div class="navbar__search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input placeholder="Search For Anything....">
+        </div>
+
+
+        <div class="navbar__icons">
+            <p>Courses</p>
+
+            <div class="mylearn">
+                <p>My Learnig</p>
+            </div>
+       
+            <div class="btn_container"> 
+                <div class="login">Login</div>
+                <div class="sign">Sign</div>
+            </div>
+
+           
+        </div>
+        <div class="navbar_i" onclick="toggleSidebar()">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+
+
+    </div>
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" onclick="toggleSidebar()">×</button>
+        <a href="#">Courses</a>
+        <a href="#">My Learning</a>
+        <a href="#">Cart</a>
+        <a href="#">Notifications</a>
+        <a href="#">Profile</a>
+    </div>
+
+
+
+
+    <!--Sales Section-->
+    <div class="sales">
+        <p>Development</p>
+        <p>Web Development</p>
+        <p>Mobile Development</p>
+        <p>Programming Languages</p>
+        <p>Game Development</p>
+        <p>Database Design & Development</p>
+        <p>Software Testing</p>
+
+    </div>
+
+
+
+
+    <div class="course">
+        <img src="./images/home2.jpg" alt="">
+    </div>
+    <!--Course Card Box-->
+    <div class="cardd">
+        <h1>Skills that start careers</h1>
+        <p>Introducing Career Accelerators - focus on the skills and real-world experience that'll get you noticed.</p>
+        <div class="card__btn">
+            <button>Explore All Career Accelerators</button>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="center">
+        <div class="training">
+            <div class="training__s1">
+                <p style="font-weight: bold;">Training 2 or more people? </p>
+                <p> Get your team access to Udemy's top 30,000+ courses</p>
+            </div>
+
+            <div class="training__s2">
+
+                <button class="btn1">
+                    <img width="20px" src="images/verified.png" alt="">
+                    Get Udemy Business</button>
+                <button class="btn2">
+                    Dismiss
+                    <img width="20px" src="images/delete.png" alt="">
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="card-container">
+
+        <!-- Card 1 -->
+        <div class="card">
+            <div style="background: radial-gradient(100.74% 78.9% at 37.01% 54.55%, #ffe1b2 0, #f69c08);">
+                <img src="https://s.udemycdn.com/career-academies/careers/full-stack-web-developer/frontend-webdev-human.png"
+                    alt="Full Stack Web Developer">
+            </div>
+            <div class="card-content">
+                <div class="card-title">Full Stack Web Developer</div>
+                <div class="card-details">
+                    <div class="star">⭐ 4.7</div>
+                    <div style="color: rgb(23, 227, 138);">453K ratings</div>
+                    <div style="color: #a435f0;">87.6 total hours</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+            <div style="background: radial-gradient(126.66% 86.17% at 40.93% 42.48%, #892de1 0, #291367 100%
+100%
+);">
+                <img src="https://s.udemycdn.com/career-academies/careers/digital-marketer/digital-marketer-hero.png"
+                    alt="Digital Marketer">
+            </div>
+
+            <div class="card-content">
+                <div class="card-title">Digital Marketer</div>
+                <div class="card-details">
+                    <div class="star">⭐ 4.5</div>
+                    <div style="color: rgb(23, 227, 138);">3.5K ratings</div>
+                    <div style="color: #a435f0;">28.4 total hours</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+            <div style=" background: radial-gradient(118.26% 99.16% at 47.42% 67.35%,#ff493c 0,#a435f0 100%);">
+                <img src="https://s.udemycdn.com/career-academies/careers/data-scientist/data-scientist-person.png"
+                    alt="Data Scientist">
+            </div>
+            <div class="card-content">
+                <div class="card-title">Data Scientist</div>
+                <div class="card-details">
+                    <div class="star">⭐ 4.6</div>
+                    <div style="color: rgb(23, 227, 138);">219K ratings</div>
+                    <div style="color: #a435f0;">47.1 total hours</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!--Recomended Section-->
+    <div id="my" class="recomended">
+        <h2 class="recomended_title">What to learn next?</h2>
+        <p>Recommended for you</p>
+
+        <div class="recomended__container">
+
+
+            <div class="recomended__card">
+                <img class="recomended__card__img" src="images/full-stack-development.png" alt="Fs">
+                <h3>Full-stack-development</h3>
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+
+
+            <div class="recomended__card">
+                <img class="recomended__card__img" src="images/python.jpeg" alt="Fs">
+                <h3>Full-stack-development</h3>
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+            <div class="recomended__card">
+                <img class="recomended__card__img" src="images/python.jpeg" alt="Fs">
+                <h3>Full-stack-development</h3>
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="recomended__card">
+                <img class="recomended__card__img" src="images/cloud.jpeg" alt="Fs">
+                <h3>Full-stack-development</h3>
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+            <div class="recomended__card">
+                <img class="recomended__card__img" src="images/python.jpeg" alt="Fs">
+                <h3>Full-stack-development</h3>
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="recomended__card">
+                <img class="recomended__card__img" src="images/python.jpeg" alt="Fs">
+                <h3>Full-stack-development</h3>
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="recomended__card">
+                <img class="recomended__card__img" src="images/c++.jpeg" alt="Fs">
+                <h3>Full-stack-development</h3>
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+            <div class="recomended__card">
+                <img class="recomended__card__img" src="images/java.jpeg" alt="Fs">
+                <h3>Full-stack-development </h3>
+
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+
+              <div class="recomended__card">
+                <img class="recomended__card__img" src="images/full-stack-development.png" alt="Fs">
+                <h3>Full-stack-development </h3>
+
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+              <div class="recomended__card">
+                <img class="recomended__card__img" src="images/full-stack-development.png" alt="Fs">
+                <h3>Full-stack-development </h3>
+
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+
+              <div class="recomended__card">
+                <img class="recomended__card__img" src="images/full-stack-development.png" alt="Fs">
+                <h3>Full-stack-development </h3>
+
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="recomended__card">
+                <img class="recomended__card__img" src="images/cloud.jpeg" alt="Fs">
+                <h3>Full-stack-development</h3>
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+
+
+    </div>
+    <!--Topoc Section-->
+    <div class="topic">
+        <h1 class="topic__tittle">Topics recommended for you</h1>
+
+        <div class="topics_containner">
+            <p>Web Development</p>
+            <p>JavaScript</p>
+            <p>Node.Js</p>
+            <p>MongoDB</p>
+            <p>CSS</p>
+            <p>React JS</p>
+            <p>Front End Web Development</p>
+            <p>HTML</p>
+            <p>Python</p>
+
+        </div>
+    </div>
+    <div class="recomended">
+        <h2 class="recomended_title">Top courses in Web Development</h2>
+        <p>Recommended for you</p>
+
+        <div class="recomended__container">
+
+
+            <div class="recomended__card">
+                <img class="recomended__card__img" src="images/cloud.jpeg" alt="Fs">
+                <h3>Full-stack-development</h3>
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+
+
+            <div class="recomended__card">
+                <img class="recomended__card__img" src="images/full-stack-development.png" alt="Fs">
+                <h3>Full-stack-development</h3>
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+
+
+            <div class="recomended__card">
+                <img class="recomended__card__img" src="images/python.jpeg" alt="Fs">
+                <h3>Full-stack-development</h3>
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="recomended__card">
+                <img class="recomended__card__img" src="images/full-stack-development.png" alt="Fs">
+                <h3>Full-stack-development</h3>
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="recomended__card">
+                <img class="recomended__card__img" src="images/cloud.jpeg" alt="Fs">
+                <h3>Full-stack-development</h3>
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="recomended__card">
+                <img class="recomended__card__img" src="images/python.jpeg" alt="Fs">
+                <h3>Full-stack-development</h3>
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+            <div class="recomended__card">
+                <img class="recomended__card__img" src="images/python.jpeg" alt="Fs">
+                <h3>Full-stack-development</h3>
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="recomended__card">
+                <img class="recomended__card__img" src="images/cloud.jpeg" alt="Fs">
+                <h3>Full-stack-development</h3>
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+            <div class="recomended__card">
+                <img class="recomended__card__img" src="images/full-stack-development.png" alt="Fs">
+                <h3>Full-stack-development </h3>
+
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+
+              <div class="recomended__card">
+                <img class="recomended__card__img" src="images/full-stack-development.png" alt="Fs">
+                <h3>Full-stack-development </h3>
+
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+              <div class="recomended__card">
+                <img class="recomended__card__img" src="images/full-stack-development.png" alt="Fs">
+                <h3>Full-stack-development </h3>
+
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+              <div class="recomended__card">
+                <img class="recomended__card__img" src="images/full-stack-development.png" alt="Fs">
+                <h3>Full-stack-development </h3>
+
+                <p>Mr.Jamal</p>
+                <p>4.9 <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                </p>
+                <p>
+                    $399
+                    <del>$1999</del>
+                </p>
+
+                <div class="btns">
+                    <button class="course__btn1">
+                        <img style="width: 20px;" src="images/verified.png" alt="">
+                        Premium
+                    </button>
+                    <button class="course__btn1 course__btn1--green">
+                        Bestseller
+                    </button>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+
+
+    </div>
+
+
+    <!--Footer Section-->
+
+    <div class="footer">
+        <div class="footer__one">
+
+            <div class="footer__one_s1">
+                <h1>About</h1>
+                <p>About us</p>
+                <p>Careers</p>
+                <p>Contact us</p>
+                <p>Blog</p>
+                <p>Investors</p>
+            </div>
+            <div class="footer__one_s2">
+
+                <h1>Legal & Accessibility</h1>
+                <p>Accessibility statement</p>
+                <p>Privacy policy</p>
+                <p>Sitemap</p>
+            </div>
+
+        </div>
+
+
+        <div class="footer__two">
+
+            <div class="footer_two_tittle">
+                <img src="images/logo-udemy.svg" alt="Udemey">
+                <p> © 2025 Udemy, Inc.</p>
+            </div>
+            <p>Cookie settings</p>
+            <p>
+                <i class="fa-solid fa-globe" style="color: #ffffff;"></i>
+                English
+            </p>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+
+
+            if (sidebar.style.right === '0px') {
+                sidebar.style.right = '-250px';
+
+            } else {
+                sidebar.style.right = '0px';
+
+            }
+        }
+
+
+        document.getElementById('close').addEventListener('click', function () {
+            document.querySelector('.popup').style.display = 'none';
+        });
+    </script>
+
+
+</body>
+
+</html>
