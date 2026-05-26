@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AURA | Technical Gear Archive</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" rel="stylesheet"/>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#000000",
+                        "secondary": "#5d5f5f",
+                        "surface": "#f3f4f6",
+                        "background": "#ffffff",
+                    },
+                    spacing: {
+                        "margin_desktop": "64px",
+                        "margin_mobile": "24px",
+                        "container_max": "1440px",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        body { background-color: #ffffff; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #000; border-radius: 10px; }
+
+        .reveal-up { 
+            opacity: 0; 
+            transform: translateY(40px); 
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+        .reveal-up.active { opacity: 1; transform: translateY(0); }
+
+        .product-card { cursor: pointer; }
+        .product-card .quick-add { transform: translateY(100%); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .product-card:hover .quick-add { transform: translateY(0); }
+        
+        #mobile-menu { transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+
+        @keyframes popIn {
+            0% { transform: translateY(10px) scale(0.9); opacity: 0; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+        .cart-pop { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+        /* Logout Dropdown */
+        #user-dropdown { display: none; }
+        #user-dropdown.active { display: block; }
+    </style>
+</head>
+
+<body class="text-primary font-sans overflow-x-hidden">
+
+    <div class="bg-black text-white py-2 text-center text-[9px] md:text-[10px] tracking-[0.3em] font-bold uppercase px-4">
+        FREE SHIPPING ON ALL ARCHIVE ORDERS OVER $150
+    </div>
+
+    <nav class="sticky top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div class="flex justify-between items-center px-6 md:px-margin_desktop py-5 md:py-6 max-w-container_max mx-auto">
+            <div class="flex items-center gap-4">
+                <button onclick="toggleMenu()" class="md:hidden material-symbols-outlined text-2xl">menu</button>
+                <a href="index.html" class="text-2xl md:text-3xl font-bold tracking-tighter uppercase">AURA</a>
+            </div>
+            
+            <div class="hidden md:flex space-x-12 items-center text-[11px] font-bold uppercase tracking-widest">
+                <a href="index.html#new-arrivals" class="hover:text-secondary transition-colors">New Arrivals</a>
+                <a href="shop.html" class="border-b-2 border-black pb-1">Shop All</a>
+                <a href="index.html#technical-series" class="hover:text-secondary transition-colors">Technical Series</a>
+            </div>
+
+            <div class="flex items-center space-x-5 md:space-x-8">
+                <div class="relative hidden sm:block">
+                    <input type="text" id="shopSearch" onkeyup="applyFilters()" placeholder="SEARCH ARCHIVE..." class="bg-gray-100 border-none rounded-full py-2.5 px-10 text-[10px] font-bold tracking-widest focus:ring-1 focus:ring-black w-40 md:w-56 outline-none">
+                    <span class="material-symbols-outlined absolute left-3 top-2.5 text-lg text-gray-400 font-light">search</span>
+                </div>
+
+                <div class="relative group flex items-center gap-2">
+                    <button onclick="toggleUserDropdown()" id="user-btn" class="flex items-center gap-2 focus:outline-none">
+                        <span class="material-symbols-outlined text-2xl hover:scale-110 transition-transform text-black">person</span>
+                        <span id="user-display-name" class="hidden md:block text-[10px] font-bold uppercase tracking-widest">Login</span>
+                    </button>
+                    <div id="user-dropdown" class="absolute top-full right-0 mt-2 w-32 bg-white border border-gray-100 shadow-xl rounded-lg py-2 z-50">
+                        <button onclick="handleLogout()" class="w-full text-left px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-red-500 hover:bg-gray-50 transition-colors">
+                            Logout
+                        </button>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <a href="cart.html" class="relative group" id="cart-btn">
+                        <span class="material-symbols-outlined text-2xl">shopping_bag</span>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-black text-white text-[9px] h-4 w-4 rounded-full flex items-center justify-center font-bold">0</span>
+                    </a>
+                    <div id="added-notification" class="hidden absolute top-12 right-0 bg-green-500 text-white text-[10px] font-bold py-2 px-4 rounded-full whitespace-nowrap shadow-xl cart-pop z-[70] flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm">check_circle</span>
+                        ITEM DEPLOYED
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-[60] transform -translate-x-full md:hidden p-8">
+        <div class="flex justify-between items-center mb-16">
+            <span class="text-2xl font-bold tracking-tighter uppercase">AURA</span>
+            <button onclick="toggleMenu()" class="material-symbols-outlined text-3xl">close</button>
+        </div>
+        <div class="flex flex-col space-y-8 text-2xl font-bold uppercase tracking-tighter">
+            <a href="index.html#new-arrivals" onclick="toggleMenu()">New Arrivals</a>
+            <a href="shop.html" onclick="toggleMenu()">Shop All</a>
+            <a href="index.html#technical-series" onclick="toggleMenu()">Technical Series</a>
+            <a href="cart.html" onclick="toggleMenu()">My Bag</a>
+        </div>
+    </div>
+
+    <main class="max-w-container_max mx-auto px-6 md:px-margin_desktop py-12 md:py-20">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8 reveal-up active">
+            <div>
+                <h1 class="text-5xl md:text-7xl font-bold tracking-tighter mb-4 uppercase leading-none">Archive 01</h1>
+                <p class="text-secondary max-w-sm text-sm md:text-base font-medium tracking-tight">Precision-engineered essentials for the modern vanguard.</p>
+            </div>
+            <div class="w-full md:w-auto flex items-center gap-4">
+                <div class="relative w-full md:w-64">
+                    <select id="sortPrice" onchange="applyFilters()" class="w-full appearance-none bg-gray-100 border-none rounded-xl py-4 px-6 text-[11px] font-bold uppercase tracking-[0.1em] cursor-pointer focus:ring-2 focus:ring-black/5">
+                        <option value="default">Sort: Release Date</option>
+                        <option value="low">Price: Low to High</option>
+                        <option value="high">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-16">
+            <aside class="w-full lg:w-56 shrink-0 space-y-10 reveal-up active">
+                <div>
+                    <h3 class="text-[10px] font-bold uppercase tracking-[0.3em] mb-8 text-gray-400 border-b pb-3">Systems</h3>
+                    <div class="flex flex-row lg:flex-col overflow-x-auto lg:overflow-visible gap-6 pb-4 lg:pb-0 no-scrollbar">
+                        <button onclick="filterCat('All')" class="cat-btn whitespace-nowrap text-[12px] font-bold uppercase tracking-widest text-black text-left" id="btn-All">All Units</button>
+                        <button onclick="filterCat('Outerwear')" class="cat-btn whitespace-nowrap text-[12px] font-bold uppercase tracking-widest text-gray-400 hover:text-black text-left" id="btn-Outerwear">Outerwear</button>
+                        <button onclick="filterCat('Tops')" class="cat-btn whitespace-nowrap text-[12px] font-bold uppercase tracking-widest text-gray-400 hover:text-black text-left" id="btn-Tops">Performance Tops</button>
+                        <button onclick="filterCat('Bottoms')" class="cat-btn whitespace-nowrap text-[12px] font-bold uppercase tracking-widest text-gray-400 hover:text-black text-left" id="btn-Bottoms">Tech Trousers</button>
+                    </div>
+                </div>
+            </aside>
+
+            <div class="flex-1">
+                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-16"></div>
+                <div id="no-results" class="hidden text-center py-40 bg-gray-50 rounded-3xl">
+                    <p class="text-gray-400 font-bold text-xs uppercase tracking-widest">No matching units found.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-12 px-6 text-center border-t border-gray-100 mt-20">
+        <p class="text-[9px] font-bold tracking-[0.5em] text-gray-400 uppercase">AURA TECHNICAL SYSTEMS — ©2026</p>
+    </footer>
+
+    <script>
+        // --- AUTH GUARD ---
+        (function() {
+            const isLoggedIn = localStorage.getItem('aura_logged_in') === 'true';
+            if (!isLoggedIn) {
+                window.location.href = 'auth.html';
+            }
+        })();
+
+        // IMAGES OPTIMIZED TO WEBP FORMAT
+        const products = [
+            { id: 1, name: "Apex Shell Jacket", price: 380, category: "Outerwear", img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=800&fm=webp" },
+            { id: 2, name: "Knit Tech Trouser", price: 245, category: "Bottoms", img: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&fm=webp" },
+            { id: 3, name: "Modular Cargo Pant", price: 110, category: "Tops", img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=800&fm=webp" },
+            { id: 4, name: "Commuter Pack", price: 290, category: "Accessories", img: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=800&fm=webp" },
+            { id: 5, name: "Summit Down Vest", price: 320, category: "Outerwear", img: "https://images.unsplash.com/photo-1620935514534-793540d6c05d?q=80&w=800&fm=webp" },
+            { id: 6, name: "Kinetic Shorts", price: 95, category: "Bottoms", img: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?q=80&w=800&fm=webp" }
+        ];
+
+        let activeCat = "All";
+        let notificationTimeout;
+
+        // --- PROFILE UI FUNCTIONS ---
+        function updateProfileUI() {
+            const userBtn = document.getElementById('user-btn');
+            const userDisplay = document.getElementById('user-display-name');
+            const isLoggedIn = localStorage.getItem('aura_logged_in') === 'true';
+            const userData = JSON.parse(localStorage.getItem('current_user'));
+
+            if (isLoggedIn && userData) {
+                userDisplay.innerText = userData.name;
+                userDisplay.classList.remove('hidden');
+                userBtn.onclick = (e) => {
+                    e.preventDefault();
+                    toggleUserDropdown();
+                };
+            } else {
+                userDisplay.innerText = "Login";
+                userBtn.onclick = () => window.location.href = 'auth.html';
+            }
+        }
+
+        function toggleUserDropdown() {
+            const dropdown = document.getElementById('user-dropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('aura_logged_in');
+            localStorage.removeItem('current_user');
+            window.location.reload(); 
+        }
+
+        window.addEventListener('click', (e) => {
+            if (!document.getElementById('user-btn').contains(e.target)) {
+                document.getElementById('user-dropdown').classList.remove('active');
+            }
+        });
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('-translate-x-full');
+        }
+
+        function navigateToDetail(id) {
+            const product = products.find(p => p.id === id);
+            localStorage.setItem('selectedProduct', JSON.stringify(product));
+            window.location.href = `product-detail.html?id=${id}`;
+        }
+
+        function renderProducts(data) {
+            const grid = document.getElementById('product-grid');
+            const noRes = document.getElementById('no-results');
+            
+            if(data.length === 0) {
+                grid.innerHTML = "";
+                noRes.classList.remove('hidden');
+                return;
+            }
+
+            noRes.classList.add('hidden');
+            grid.innerHTML = data.map((p, index) => {
+                // FALLBACK TO WEBP IF NOT PRESENT
+                const imgSrc = p.img.includes('fm=webp') ? p.img : `${p.img}&fm=webp`;
+                
+                return `
+                <div class="product-card group relative reveal-up active" style="--i: ${index};" onclick="navigateToDetail(${p.id})">
+                    <div class="relative aspect-[3/4] overflow-hidden rounded-3xl mb-6 bg-gray-100">
+                        <img src="${imgSrc}" alt="${p.name}" 
+                             onerror="this.src='https://images.unsplash.com/photo-1555529669-2269763671c0?q=80&w=800&fm=webp'"
+                             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                        <div class="quick-add absolute inset-x-0 bottom-0 p-4">
+                            <button onclick="addToCart(event, ${p.id})" class="w-full bg-black text-white py-4 rounded-2xl font-bold text-[10px] tracking-widest shadow-2xl hover:bg-white hover:text-black transition-all uppercase">
+                                Deploy to Bag — $${p.price}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="px-2">
+                        <div class="flex justify-between items-start mb-1">
+                            <p class="text-[9px] text-gray-400 font-bold uppercase tracking-[0.2em]">${p.category}</p>
+                            <span class="text-xs font-bold">$${p.price}</span>
+                        </div>
+                        <h3 class="font-bold text-lg tracking-tighter uppercase">${p.name}</h3>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        function addToCart(event, id) {
+            event.stopPropagation(); 
+            let cart = JSON.parse(localStorage.getItem('aura_cart')) || [];
+            const product = products.find(p => p.id === id);
+            
+            const existing = cart.find(item => item.id === id);
+            if(existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    category: product.category,
+                    image: product.img,
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem('aura_cart', JSON.stringify(cart));
+            updateCartCount();
+            showNotification();
+            
+            const btn = event.currentTarget;
+            const originalText = btn.innerText;
+            btn.innerText = "ADDED TO BAG";
+            btn.style.backgroundColor = "#22c55e";
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.backgroundColor = "black";
+            }, 2000);
+        }
+
+        function showNotification() {
+            const note = document.getElementById('added-notification');
+            note.classList.remove('hidden');
+            clearTimeout(notificationTimeout);
+            notificationTimeout = setTimeout(() => {
+                note.classList.add('hidden');
+            }, 2500);
+        }
+
+        function filterCat(cat) {
+            activeCat = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('text-black');
+                btn.classList.add('text-gray-400');
+            });
+            document.getElementById('btn-' + cat).classList.replace('text-gray-400', 'text-black');
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const query = document.getElementById('shopSearch').value.toLowerCase();
+            const sort = document.getElementById('sortPrice').value;
+            let filtered = products.filter(p => (activeCat === "All" || p.category === activeCat) && p.name.toLowerCase().includes(query));
+            
+            if(sort === 'low') filtered.sort((a,b) => a.price - b.price);
+            if(sort === 'high') filtered.sort((a,b) => b.price - a.price);
+            
+            renderProducts(filtered);
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('aura_cart')) || [];
+            const count = document.getElementById('cart-count');
+            if(count) {
+                const total = cart.reduce((acc, item) => acc + item.quantity, 0);
+                count.innerText = total;
+            }
+        }
+
+        const reveal = () => {
+            document.querySelectorAll('.reveal-up').forEach(item => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 50) {
+                    item.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', reveal);
+        window.onload = () => {
+            renderProducts(products);
+            updateCartCount();
+            updateProfileUI();
+            setTimeout(reveal, 100);
+        };
+    </script>
+</body>
+</html>
