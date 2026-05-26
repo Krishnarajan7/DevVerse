@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AURA | Technical Vanguard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" rel="stylesheet"/>
+    
+    <!-- script -->
+    <script> 
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#000000",
+                        "secondary": "#5d5f5f",
+                        "background": "#f9f9f9",
+                    },
+                    spacing: {
+                        "margin_desktop": "64px",
+                        "margin_mobile": "24px",
+                        "container_max": "1440px",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        body { background-color: #f9f9f9; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .hero-image-zoom { transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .hero-container:hover .hero-image-zoom { transform: scale(1.05); }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #000; border-radius: 10px; }
+
+        .product-card:hover .product-action { opacity: 1; transform: translateY(0); }
+
+        /* Mobile Menu Transition */
+        #mobile-menu { transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        /* Logout Dropdown */
+        #user-dropdown { display: none; }
+        #user-dropdown.active { display: block; }
+    </style>
+</head>
+
+<body class="text-primary font-sans overflow-x-hidden">
+
+    <div class="bg-black text-white py-2 text-center overflow-hidden">
+        <p class="text-[9px] md:text-[10px] tracking-[0.3em] font-bold uppercase whitespace-nowrap px-4">
+            GLOBAL ARCHIVE DEPLOYMENT: SERIES 01 AVAILABLE NOW — FREE SHIPPING ON ORDERS ABOVE $50
+        </p>
+    </div>
+
+    <nav class="sticky top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div class="flex justify-between items-center px-6 md:px-margin_desktop py-5 md:py-6 max-w-container_max mx-auto">
+            <div class="flex items-center gap-4">
+                <button onclick="toggleMenu()" class="md:hidden material-symbols-outlined text-2xl">menu</button>
+                <a href="index.html" class="text-2xl md:text-3xl font-bold tracking-tighter uppercase">AURA</a>
+            </div>
+            
+            <div class="hidden md:flex space-x-12 items-center text-[11px] font-bold uppercase tracking-widest">
+                <a href="#new-arrivals" class="hover:text-secondary transition-colors">New Arrivals</a>
+                <a href="shop.html" class="hover:text-secondary transition-colors">Shop All</a>
+                <a href="#technical-series" class="hover:text-secondary transition-colors">Fashions</a>
+            </div>
+
+            <div class="flex items-center space-x-5 md:space-x-8">
+                <a href="shop.html" class="material-symbols-outlined text-2xl hover:scale-110 transition-transform text-black hidden sm:block">search</a>
+                
+                <div class="relative group flex items-center gap-2">
+                    <button onclick="toggleUserDropdown()" id="user-btn" class="flex items-center gap-2 focus:outline-none">
+                        <span class="material-symbols-outlined text-2xl hover:scale-110 transition-transform text-black">person</span>
+                        <span id="user-display-name" class="hidden md:block text-[10px] font-bold uppercase tracking-widest">Login</span>
+                    </button>
+                    <div id="user-dropdown" class="absolute top-full right-0 mt-2 w-32 bg-white border border-gray-100 shadow-xl rounded-lg py-2 z-50">
+                        <button onclick="handleLogout()" class="w-full text-left px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-red-500 hover:bg-gray-50 transition-colors">
+                            Logout
+                        </button>
+                    </div>
+                </div>
+
+                <a href="cart.html" class="relative group" id="cart-btn">
+                    <span class="material-symbols-outlined text-2xl">shopping_bag</span>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-black text-white text-[9px] h-4 w-4 rounded-full flex items-center justify-center font-bold">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-[60] transform -translate-x-full md:hidden p-8">
+        <div class="flex justify-between items-center mb-16">
+            <span class="text-2xl font-bold tracking-tighter uppercase">AURA</span>
+            <button onclick="toggleMenu()" class="material-symbols-outlined text-3xl">close</button>
+        </div>
+        <div class="flex flex-col space-y-8 text-2xl font-bold uppercase tracking-tighter">
+            <a href="#new-arrivals" onclick="toggleMenu()">New Arrivals</a>
+            <a href="shop.html" onclick="toggleMenu()">Shop All</a>
+            <a href="#technical-series" onclick="toggleMenu()">Technical Series</a>
+            <a href="cart.html" onclick="toggleMenu()">My Bag</a>
+        </div>
+    </div>
+
+    <main>
+        <section class="relative h-[85vh] md:h-[90vh] flex items-center justify-center overflow-hidden bg-gray-200 hero-container">
+            <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=2000" class="absolute inset-0 w-full h-full object-cover hero-image-zoom brightness-75 md:brightness-90" alt="Hero">
+            <div class="relative z-10 text-center px-6 max-w-4xl">
+                <p class="text-white text-[10px] md:text-[11px] font-bold tracking-[0.5em] mb-4 md:mb-6 uppercase reveal">// NEW PERSPECTIVE</p>
+                <h1 class="text-white text-5xl md:text-9xl font-bold tracking-tighter mb-8 md:mb-10 leading-tight reveal">TECHNICAL<br>ESSENCE.</h1>
+                <div class="reveal">
+                    <a href="shop.html" class="inline-block bg-white text-black px-10 md:px-14 py-4 md:py-5 rounded-full font-bold text-[10px] md:text-[11px] tracking-widest hover:bg-black hover:text-white transition-all shadow-2xl uppercase">
+                        EXPLORE COLLECTION
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="new-arrivals" class="max-w-container_max mx-auto px-6 md:px-margin_desktop py-20 md:py-32">
+            <div class="text-center mb-16 reveal">
+                <p class="text-secondary text-[10px] font-bold tracking-[0.4em] uppercase mb-4">Latest Drops</p>
+                <h2 class="text-4xl md:text-6xl font-bold tracking-tighter uppercase mb-6">New Arrivals</h2>
+                <div class="w-12 h-[2px] bg-black mx-auto"></div>
+            </div>
+
+            <div id="featured-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-4 md:gap-8">
+                </div>
+        </section>
+
+        <section id="technical-series" class="bg-gray-50 py-20 md:py-32 border-y border-gray-100">
+            <div class="max-w-container_max mx-auto px-6 md:px-margin_desktop">
+                <div class="flex flex-col md:flex-row items-center gap-12 reveal">
+                    <div class="w-full md:w-1/2 overflow-hidden rounded-2xl shadow-2xl bg-gray-200">
+                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200" 
+                             class="w-full h-[500px] md:h-[650px] object-cover hover:scale-105 transition-transform duration-1000" 
+                             alt="Technical Fashion Look">
+                    </div>
+                    <div class="w-full md:w-1/2 space-y-6">
+                        <span class="text-[10px] font-bold tracking-[0.4em] text-secondary uppercase">// TECHNICAL SERIES </span>
+                        <h2 class="text-4xl md:text-6xl font-bold tracking-tighter uppercase leading-tight">Advanced Performance <br> Systems.</h2>
+                        <p class="text-secondary text-sm md:text-base leading-relaxed max-w-md">
+                            Exploring the intersection of high-utility functionality and avant-garde aesthetic. Engineered for the modern explorer.
+                        </p>
+                        <div class="pt-4">
+                            <a href="shop.html" class="inline-block bg-black text-white px-10 py-4 rounded-full font-bold text-[10px] tracking-widest hover:bg-gray-800 transition-all uppercase">
+                                View Technical Drops
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="the-archive" class="bg-white py-20 md:py-32">
+            <div class="max-w-container_max mx-auto px-6 md:px-margin_desktop">
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-12 uppercase reveal">The Archive</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-10">
+                    <a href="shop.html?category=Outerwear" class="group cursor-pointer reveal">
+                        <div class="relative aspect-[4/5] overflow-hidden rounded-2xl mb-5 bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=800" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                        </div>
+                        <h3 class="text-lg md:text-xl font-semibold mb-1 uppercase">Outerwear</h3>
+                    </a>
+                    <a href="shop.html?category=Bottoms" class="group cursor-pointer reveal">
+                        <div class="relative aspect-[4/5] overflow-hidden rounded-2xl mb-5 bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1550639525-c97d455acf70?q=80&w=800" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                        </div>
+                        <h3 class="text-lg md:text-xl font-semibold mb-1 uppercase">Modulars</h3>
+                    </a>
+                    <a href="shop.html?category=Accessories" class="group cursor-pointer reveal">
+                        <div class="relative aspect-[4/5] overflow-hidden rounded-2xl mb-5 bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                        </div>
+                        <h3 class="text-lg md:text-xl font-semibold mb-1 uppercase">Accessories</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-black py-24 md:py-32">
+            <div class="max-w-[800px] mx-auto px-6 text-center text-white">
+                <h2 class="text-4xl md:text-7xl font-bold tracking-tighter mb-8 reveal uppercase">Join the Network.</h2>
+                <form onsubmit="event.preventDefault(); subscribe();" class="flex flex-col md:flex-row justify-center items-center gap-4 reveal">
+                    <input type="email" id="newsInput" required placeholder="EMAIL@DOMAIN.COM" class="bg-white/10 border-none rounded-full px-8 py-4 w-full md:w-96 text-[10px] font-bold tracking-widest uppercase text-white outline-none">
+                    <button type="submit" class="bg-white text-black px-10 py-4 rounded-full font-bold text-[10px] tracking-widest hover:bg-gray-200 transition-all uppercase">SUBSCRIBE</button>
+                </form>
+                <p id="subMsg" class="mt-8 text-[9px] font-bold text-white tracking-[0.4em] hidden uppercase">SIGNAL ESTABLISHED.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-12 px-6 text-center border-t border-gray-100">
+        <p class="text-[9px] font-bold tracking-[0.5em] text-gray-400 uppercase">AURA TECHNICAL SYSTEMS — ©2026</p>
+    </footer>
+
+    <script>
+        // --- AUTH GUARD (TOP-LA ADD PANNIYACHU) ---
+        (function() {
+            const isLoggedIn = localStorage.getItem('aura_logged_in') === 'true';
+            if (!isLoggedIn) {
+                window.location.href = 'auth.html';
+            }
+        })();
+
+        const products = [
+            { id: 1, name: "Vanguard Parka v.01", price: 280, img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=800" },
+            { id: 2, name: "Technical Shell Layer", price: 195, img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=800" },
+            { id: 3, name: "Modular Cargo Pant", price: 160, img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=800" },
+            { id: 4, name: "Thermal Grid Base", price: 85, img: "https://images.unsplash.com/photo-1578587018452-892bacefd3f2?q=80&w=800" },
+            { id: 5, name: "Summit Down Vest", price: 320, img: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=800" },
+            { id: 6, name: "Commuter Pack 20L", price: 145, img: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=800" }
+        ];
+
+        function updateProfileUI() {
+            const userBtn = document.getElementById('user-btn');
+            const userDisplay = document.getElementById('user-display-name');
+            const isLoggedIn = localStorage.getItem('aura_logged_in') === 'true';
+            const userData = JSON.parse(localStorage.getItem('current_user'));
+
+            if (isLoggedIn && userData) {
+                userDisplay.innerText = userData.name;
+                userDisplay.classList.remove('hidden');
+                userBtn.onclick = (e) => {
+                    e.preventDefault();
+                    toggleUserDropdown();
+                };
+            } else {
+                userDisplay.innerText = "Login";
+                userBtn.onclick = () => window.location.href = 'auth.html';
+            }
+        }
+
+        function toggleUserDropdown() {
+            const dropdown = document.getElementById('user-dropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('aura_logged_in');
+            localStorage.removeItem('current_user');
+            window.location.reload(); 
+        }
+
+        window.addEventListener('click', (e) => {
+            if (!document.getElementById('user-btn').contains(e.target)) {
+                document.getElementById('user-dropdown').classList.remove('active');
+            }
+        });
+
+        function renderProducts() {
+            const grid = document.getElementById('featured-grid');
+            if(!grid) return;
+            grid.innerHTML = products.map(p => `
+                <div class="product-card reveal active">
+                    <div class="relative aspect-[3/4] overflow-hidden rounded-xl bg-gray-100 mb-4 group">
+                        <button onclick="goToDetail(${p.id})">
+                            <img src="${p.img}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        </button>
+                        <div class="product-action absolute bottom-4 left-4 right-4 opacity-0 transform translate-y-4 transition-all duration-300">
+                            <button onclick="addToCart('${p.name}', ${p.price}, '${p.img}', ${p.id})" class="w-full bg-white/90 backdrop-blur text-black py-3 rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-colors">Quick Add</button>
+                        </div>
+                    </div>
+                    <button onclick="goToDetail(${p.id})" class="text-left">
+                        <h3 class="text-xs md:text-sm font-bold uppercase tracking-tighter">${p.name}</h3>
+                        <p class="text-secondary text-xs mt-1">$${p.price.toFixed(2)}</p>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function goToDetail(productId) {
+            const product = products.find(p => p.id === productId);
+            localStorage.setItem('selectedProduct', JSON.stringify(product));
+            window.location.href = `product-detail.html?id=${productId}`;
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const isHidden = menu.classList.contains('-translate-x-full');
+            if (isHidden) {
+                menu.classList.remove('-translate-x-full');
+                document.body.style.overflow = 'hidden';
+            } else {
+                menu.classList.add('-translate-x-full');
+                document.body.style.overflow = '';
+            }
+        }
+
+        const reveal = () => {
+            const items = document.querySelectorAll('.reveal');
+            items.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                if (itemTop < window.innerHeight - 80) item.classList.add('active');
+            });
+        };
+
+        function subscribe() {
+            const msg = document.getElementById('subMsg');
+            msg.classList.remove('hidden');
+            document.getElementById('newsInput').value = "";
+            setTimeout(() => { msg.classList.add('hidden'); }, 4000);
+        }
+
+        function addToCart(name, price, image, id) {
+            let cart = JSON.parse(localStorage.getItem('aura_cart')) || [];
+            const existingItem = cart.find(item => item.id === id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ id, name, price, image, quantity: 1 });
+            }
+            
+            localStorage.setItem('aura_cart', JSON.stringify(cart));
+            updateGlobalCart();
+            
+            const btn = event.target;
+            const originalText = btn.innerText;
+            btn.innerText = "ADDED TO BAG";
+            btn.style.backgroundColor = "#22c55e";
+            btn.style.color = "white";
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.backgroundColor = "";
+                btn.style.color = "";
+            }, 2000);
+        }
+
+        function updateGlobalCart() {
+            const cart = JSON.parse(localStorage.getItem('aura_cart')) || [];
+            const count = document.getElementById('cart-count');
+            const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+            if (count) count.innerText = totalItems;
+        }
+
+        window.addEventListener('scroll', reveal);
+        window.onload = () => { 
+            renderProducts();
+            reveal(); 
+            updateGlobalCart(); 
+            updateProfileUI(); 
+        }; 
+
+
+    </script>
+</body>
+</html>

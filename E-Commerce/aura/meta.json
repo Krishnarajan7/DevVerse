@@ -1,0 +1,9 @@
+{
+  "title": "Aura E-Commerce Website",
+  "description": "A responsive e-commerce web application with standard user interface.",
+  "image": "screenshot.png",
+  "tech": ["HTML", "CSS", "JavaScript"],
+  "category": "E-Commerce",
+  "author": "yasirebnuariff",
+  "liveDemo": ""
+}

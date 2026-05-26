@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA | Access Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet"/>
+    <style>
+        .reveal-up { 
+            opacity: 0; 
+            transform: translateY(20px); 
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+        .reveal-up.active { opacity: 1; transform: translateY(0); }
+        
+        input:focus {
+            outline: none;
+            border-color: black !important;
+        }
+
+        .error-shake {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Optimization for smooth background if needed */
+        body {
+            background-color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+<body class="bg-white text-black font-sans min-h-screen flex flex-col">
+
+    <nav class="w-full z-50 bg-white border-b border-gray-100">
+        <div class="flex justify-between items-center px-6 md:px-16 py-6 max-w-[1440px] mx-auto">
+            <a href="index.html" class="text-2xl font-bold tracking-tighter uppercase">AURA</a>
+            <a href="shop.html" class="text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-black transition-colors">Back to Shop</a>
+        </div>
+    </nav>
+
+    <main class="flex-1 flex items-center justify-center px-6 py-12">
+        <div class="w-full max-w-[400px] reveal-up active">
+            
+            <div class="text-center mb-10">
+                <!-- If you add a logo here, use .webp -->
+                <h1 id="form-title" class="text-4xl font-bold tracking-tighter uppercase mb-2">Welcome Back</h1>
+                <p id="form-subtitle" class="text-gray-400 text-[10px] uppercase tracking-[0.2em] font-medium">Enter your credentials to access your archive</p>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 ml-1">Email / Username</label>
+                    <input type="text" id="email-input" required placeholder="your@email.com" 
+                        class="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl text-sm transition-all focus:bg-white focus:ring-4 focus:ring-gray-100">
+                    <p id="email-error" class="hidden text-[10px] text-red-500 font-bold uppercase tracking-widest mt-2 ml-1"></p>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 ml-1">Password</label>
+                    <input type="password" id="password-input" required placeholder="••••••••" 
+                        class="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl text-sm transition-all focus:bg-white focus:ring-4 focus:ring-gray-100">
+                    <p id="password-error" class="hidden text-[10px] text-red-500 font-bold uppercase tracking-widest mt-2 ml-1"></p>
+                </div>
+                
+                <button type="submit" class="w-full bg-black text-white py-5 rounded-2xl font-bold text-[10px] tracking-[0.2em] hover:bg-gray-800 transition-all uppercase shadow-xl mt-4">
+                    Sign In
+                </button>
+            </form>
+
+            <!-- SIGNUP FORM -->
+            <form id="signup-form" class="space-y-4 hidden">
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="text" id="signup-fname" placeholder="First Name" required class="w-full px-6 py-4 bg-gray-50 rounded-2xl text-sm outline-none focus:bg-white focus:ring-4 focus:ring-gray-100">
+                    <input type="text" id="signup-lname" placeholder="Last Name" required class="w-full px-6 py-4 bg-gray-50 rounded-2xl text-sm outline-none focus:bg-white focus:ring-4 focus:ring-gray-100">
+                </div>
+                <div>
+                    <input type="email" id="signup-email" placeholder="Email" required class="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl text-sm outline-none focus:bg-white focus:ring-4 focus:ring-gray-100">
+                    <p id="signup-email-error" class="hidden text-[10px] text-red-500 font-bold uppercase tracking-widest mt-2 ml-1"></p>
+                </div>
+                <div>
+                    <input type="password" id="signup-pass" placeholder="Password" required class="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl text-sm outline-none focus:bg-white focus:ring-4 focus:ring-gray-100">
+                </div>
+                <div>
+                    <input type="password" id="signup-confirm-pass" placeholder="Confirm Password" required class="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl text-sm outline-none focus:bg-white focus:ring-4 focus:ring-gray-100">
+                    <p id="signup-pass-error" class="hidden text-[10px] text-red-500 font-bold uppercase tracking-widest mt-2 ml-1"></p>
+                </div>
+                <p id="signup-msg" class="hidden text-[10px] text-green-600 font-bold uppercase tracking-widest mt-2 text-center"></p>
+                <button type="submit" class="w-full bg-black text-white py-5 rounded-2xl font-bold text-[10px] tracking-[0.2em] uppercase shadow-xl">Create Account</button>
+            </form>
+
+            <div class="mt-8 text-center">
+                <p id="toggle-text" class="text-gray-400 text-[10px] font-bold uppercase tracking-widest">
+                    New to AURA? 
+                    <button onclick="toggleAuth()" class="text-black hover:underline ml-1">Create an account</button>
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="py-8 border-t border-gray-100 text-center">
+        <p class="text-[9px] text-gray-300 uppercase tracking-[0.3em]">&copy; 2026 AURA ARCHIVE. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        
+        const emailInput = document.getElementById('email-input');
+        const passwordInput = document.getElementById('password-input');
+        const emailError = document.getElementById('email-error');
+        const passwordError = document.getElementById('password-error');
+
+        // --- SIGN UP LOGIC ---
+        signupForm.onsubmit = (e) => {
+            e.preventDefault();
+            
+            const emailInputSU = document.getElementById('signup-email');
+            const passInputSU = document.getElementById('signup-pass');
+            const confirmPassInputSU = document.getElementById('signup-confirm-pass');
+            const fname = document.getElementById('signup-fname').value;
+            
+            const signupEmailError = document.getElementById('signup-email-error');
+            const signupPassError = document.getElementById('signup-pass-error');
+
+            signupEmailError.classList.add('hidden');
+            signupPassError.classList.add('hidden');
+            emailInputSU.classList.remove('border-red-500', 'error-shake');
+            confirmPassInputSU.classList.remove('border-red-500', 'error-shake');
+
+            if (emailInputSU.value !== emailInputSU.value.toLowerCase()) {
+                signupEmailError.innerText = "Your mail must be in lowercase";
+                signupEmailError.classList.remove('hidden');
+                emailInputSU.classList.add('border-red-500', 'error-shake');
+                return;
+            }
+
+            if (passInputSU.value !== confirmPassInputSU.value) {
+                signupPassError.innerText = "Passwords do not match";
+                signupPassError.classList.remove('hidden');
+                confirmPassInputSU.classList.add('border-red-500', 'error-shake');
+                return;
+            }
+            
+            let users = JSON.parse(localStorage.getItem('aura_users')) || [];
+            const exists = users.find(u => u.email === emailInputSU.value);
+            if(exists) {
+                signupEmailError.innerText = "Account already exists!";
+                signupEmailError.classList.remove('hidden');
+                return;
+            }
+
+            users.push({ email: emailInputSU.value, password: passInputSU.value, name: fname });
+            localStorage.setItem('aura_users', JSON.stringify(users));
+
+            const msg = document.getElementById('signup-msg');
+            msg.innerText = "ACCOUNT CREATED. PROCEED TO SIGN IN.";
+            msg.classList.remove('hidden');
+
+            setTimeout(() => {
+                toggleAuth();
+                msg.classList.add('hidden');
+                signupForm.reset();
+            }, 1500);
+        };
+
+        // --- LOGIN LOGIC ---
+        loginForm.onsubmit = (e) => {
+            e.preventDefault();
+            
+            emailError.classList.add('hidden');
+            passwordError.classList.add('hidden');
+            emailInput.classList.remove('border-red-500', 'error-shake');
+            passwordInput.classList.remove('border-red-500', 'error-shake');
+
+            if (emailInput.value !== emailInput.value.toLowerCase()) {
+                emailError.innerText = "Your mail must be in lowercase";
+                emailError.classList.remove('hidden');
+                emailInput.classList.add('border-red-500', 'error-shake');
+                return;
+            }
+
+            const emailVal = emailInput.value;
+            const passVal = passwordInput.value;
+            let users = JSON.parse(localStorage.getItem('aura_users')) || [];
+            const userFound = users.find(u => u.email === emailVal);
+
+            if (!userFound) {
+                emailError.innerText = "Account not found. Please register.";
+                emailError.classList.remove('hidden');
+                emailInput.classList.add('border-red-500', 'error-shake');
+            } 
+            else if (userFound.password !== passVal) {
+                passwordError.innerText = "Incorrect password";
+                passwordError.classList.remove('hidden');
+                passwordInput.classList.add('border-red-500', 'error-shake');
+            } 
+            else {
+                localStorage.setItem('aura_logged_in', 'true');
+                localStorage.setItem('current_user', JSON.stringify(userFound));
+                window.location.href = 'index.html';
+            }
+        };
+
+        let isLogin = true;
+        function toggleAuth() {
+            const title = document.getElementById('form-title');
+            const subtitle = document.getElementById('form-subtitle');
+            const toggleText = document.getElementById('toggle-text');
+
+            if (isLogin) {
+                loginForm.classList.add('hidden');
+                signupForm.classList.remove('hidden');
+                title.innerText = "Join the Archive";
+                subtitle.innerText = "Create your digital identity to start collecting";
+                toggleText.innerHTML = `Already have an account? <button onclick="toggleAuth()" class="text-black hover:underline ml-1">Sign In</button>`;
+            } else {
+                signupForm.classList.add('hidden');
+                loginForm.classList.remove('hidden');
+                title.innerText = "Welcome Back";
+                subtitle.innerText = "Enter your credentials to access your archive";
+                toggleText.innerHTML = `New to AURA? <button onclick="toggleAuth()" class="text-black hover:underline ml-1">Create an account</button>`;
+            }
+            isLogin = !isLogin;
+        }
+
+        // Reveal effect on load
+        window.onload = () => {
+            document.querySelector('.reveal-up').classList.add('active');
+        };
+    </script>
+</body>
+</html>

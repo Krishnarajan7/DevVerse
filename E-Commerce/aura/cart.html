@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA | Your Archive Bag</title>
+    <script src="https://cdn.tailwindcss.com"></script>  
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" rel="stylesheet"/>
+    
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .reveal-up { 
+            opacity: 0; 
+            transform: translateY(20px); 
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+        .reveal-up.active { opacity: 1; transform: translateY(0); }
+        
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff;
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            animation: rotation 1s linear infinite;
+        }
+        @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #000; border-radius: 10px; }
+
+        .payment-option input:checked + div {
+            border-color: black;
+            background-color: #fafafa;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        #mobile-menu { transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        /* User Dropdown Style */
+        #user-dropdown { display: none; }
+        #user-dropdown.active { display: block; }
+        
+        /* Error Message Style */
+        .error-text { color: #ef4444; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; display: none; }
+    </style>
+</head>
+<body class="bg-white text-black font-sans overflow-x-hidden">
+
+    <div class="bg-black text-white py-2 text-center text-[9px] md:text-[10px] tracking-[0.3em] font-bold uppercase px-4">
+        FREE SHIPPING ON ALL ARCHIVE ORDERS OVER $150
+    </div>
+
+    <nav class="sticky top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div class="flex justify-between items-center px-6 md:px-16 py-5 md:py-6 max-w-[1440px] mx-auto">
+            <div class="flex items-center gap-4">
+                <button onclick="toggleMenu()" class="md:hidden material-symbols-outlined text-2xl">menu</button>
+                <a href="index.html" class="text-2xl md:text-3xl font-bold tracking-tighter uppercase">AURA</a>
+            </div>
+            
+            <div class="hidden md:flex space-x-12 items-center text-[11px] font-bold uppercase tracking-widest">
+                <a href="index.html#new-arrivals" class="hover:text-secondary transition-colors">New Arrivals</a>
+                <a href="shop.html" class="hover:text-secondary transition-colors">Shop All</a>
+                <a href="index.html#technical-series" class="hover:text-secondary transition-colors">Technical Series</a>
+            </div>
+
+            <div class="flex items-center space-x-5 md:space-x-8">
+                <div class="relative group flex items-center gap-2 border-r border-gray-100 pr-5 md:pr-8">
+                    <button onclick="toggleUserDropdown()" id="user-btn" class="flex items-center gap-2 focus:outline-none">
+                        <span class="material-symbols-outlined text-2xl hover:scale-110 transition-transform text-black">person</span>
+                        <span id="user-display-name" class="hidden md:block text-[10px] font-bold uppercase tracking-widest">Login</span>
+                    </button>
+                    <div id="user-dropdown" class="absolute top-full right-0 mt-4 w-40 bg-white border border-gray-100 shadow-2xl rounded-xl py-2 z-50">
+                        <button onclick="handleLogout()" class="w-full text-left px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-red-500 hover:bg-gray-50 transition-colors">
+                            Logout
+                        </button>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <a href="cart.html" class="relative group" id="cart-btn">
+                        <span class="material-symbols-outlined text-2xl">shopping_bag</span>
+                        <span id="cart-count-nav" class="absolute -top-2 -right-2 bg-black text-white text-[9px] h-4 w-4 rounded-full flex items-center justify-center font-bold">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-[100] transform -translate-x-full md:hidden p-8">
+        <div class="flex justify-between items-center mb-16">
+            <span class="text-2xl font-bold tracking-tighter uppercase">AURA</span>
+            <button onclick="toggleMenu()" class="material-symbols-outlined text-3xl">close</button>
+        </div>
+        <div class="flex flex-col space-y-8 text-2xl font-bold uppercase tracking-tighter">
+            <a href="index.html" onclick="toggleMenu()">Home</a>
+            <a href="shop.html" onclick="toggleMenu()">Shop All</a>
+            <a href="index.html#new-arrivals" onclick="toggleMenu()">New Arrivals</a>
+            <a href="index.html#technical-series" onclick="toggleMenu()">Technical Series</a>
+        </div>
+    </div>
+
+    <div id="checkout-modal" class="fixed inset-0 z-[90] flex items-center justify-center bg-black/60 backdrop-blur-sm hidden p-4">
+        <div class="bg-white p-6 md:p-10 rounded-[32px] max-w-lg w-full max-h-[90vh] overflow-y-auto custom-scroll relative">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl font-bold uppercase tracking-tighter">Shipping Details</h2>
+                <button onclick="closeCheckout()" class="material-symbols-outlined text-gray-400 hover:text-black">close</button>
+            </div>
+            
+            <form id="details-form" onsubmit="confirmOrder(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <input type="text" required placeholder="FIRST NAME" class="bg-gray-50 border-none rounded-xl p-4 text-[11px] font-bold tracking-widest uppercase focus:ring-1 focus:ring-black outline-none w-full">
+                    <input type="text" required placeholder="LAST NAME" class="bg-gray-50 border-none rounded-xl p-4 text-[11px] font-bold tracking-widest uppercase focus:ring-1 focus:ring-black outline-none w-full">
+                </div>
+                
+                <div>
+                    <input type="email" id="email-input" required placeholder="EMAIL ADDRESS" class="w-full bg-gray-50 border-none rounded-xl p-4 text-[11px] font-bold tracking-widest focus:ring-1 focus:ring-black outline-none">
+                    <p id="email-error" class="error-text">Your mail must be in lowercase</p>
+                </div>
+
+                <div>
+                    <input type="tel" id="phone-input" required placeholder="MOBILE NUMBER" class="w-full bg-gray-50 border-none rounded-xl p-4 text-[11px] font-bold tracking-widest uppercase focus:ring-1 focus:ring-black outline-none">
+                    <p id="phone-error" class="error-text">Your number must be in 10 digits</p>
+                </div>
+                
+                <input type="text" required placeholder="SHIPPING ADDRESS" class="w-full bg-gray-50 border-none rounded-xl p-4 text-[11px] font-bold tracking-widest uppercase focus:ring-1 focus:ring-black outline-none">
+                
+                <div class="pt-6 border-t border-gray-100">
+                    <h3 class="text-[10px] font-bold uppercase tracking-[0.2em] mb-4 text-gray-400">Payment Method</h3>
+                    <div class="grid grid-cols-1 gap-3">
+                        <label class="payment-option cursor-pointer">
+                            <input type="radio" name="payment" value="gpay" class="hidden" checked onclick="toggleCardFields(false)">
+                            <div class="border border-gray-100 p-4 rounded-xl flex items-center justify-between transition-all">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-gray-400">account_balance_wallet</span>
+                                    <span class="text-[10px] font-bold uppercase tracking-widest">Google Pay</span>
+                                </div>
+                                <div class="w-2 h-2 rounded-full bg-black"></div>
+                            </div>
+                        </label>
+                        <label class="payment-option cursor-pointer">
+                            <input type="radio" name="payment" value="card" class="hidden" onclick="toggleCardFields(true)">
+                            <div class="border border-gray-100 p-4 rounded-xl flex items-center justify-between transition-all">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-gray-400">credit_card</span>
+                                    <span class="text-[10px] font-bold uppercase tracking-widest">Credit / Debit Card</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="payment-option cursor-pointer">
+                            <input type="radio" name="payment" value="cod" class="hidden" onclick="toggleCardFields(false)">
+                            <div class="border border-gray-100 p-4 rounded-xl flex items-center justify-between transition-all">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-gray-400">local_shipping</span>
+                                    <span class="text-[10px] font-bold uppercase tracking-widest">Cash on Delivery</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="card-fields" class="hidden space-y-4 pt-2 bg-gray-50/50 p-4 rounded-2xl border border-dashed border-gray-200">
+                    <input type="text" placeholder="CARD NUMBER" class="w-full bg-white border border-gray-100 rounded-xl p-4 text-[11px] font-bold tracking-widest uppercase outline-none focus:border-black">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="text" placeholder="MM/YY" class="bg-white border border-gray-100 rounded-xl p-4 text-[11px] font-bold tracking-widest uppercase outline-none focus:border-black">
+                        <input type="text" placeholder="CVV" class="bg-white border border-gray-100 rounded-xl p-4 text-[11px] font-bold tracking-widest uppercase outline-none focus:border-black">
+                    </div>
+                </div>
+
+                <button type="submit" id="confirm-btn" class="w-full bg-black text-white py-5 rounded-2xl font-bold text-[10px] tracking-[0.2em] uppercase mt-6 hover:bg-gray-800 transition-all shadow-xl flex items-center justify-center">
+                    <span id="confirm-btn-text">Pay Now</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="success-modal" class="fixed inset-0 z-[110] flex items-center justify-center bg-black/60 backdrop-blur-sm hidden p-4">
+        <div class="bg-white p-10 rounded-[32px] max-w-sm w-full text-center">
+            <span class="material-symbols-outlined text-6xl text-green-500 mb-4">check_circle</span>
+            <h2 class="text-2xl font-bold uppercase tracking-tighter mb-2">Order Confirmed</h2>
+            <p class="text-gray-500 text-sm mb-8 uppercase tracking-widest font-medium">Your gear is being prepared for deployment.</p>
+            <button onclick="closeModal()" class="w-full bg-black text-white py-4 rounded-2xl font-bold text-[10px] tracking-widest uppercase">Continue Shopping</button>
+        </div>
+    </div>
+
+    <main class="max-w-[1440px] mx-auto px-6 md:px-16 py-12 md:py-20">
+        <div class="reveal-up active">
+            <h1 class="text-4xl md:text-6xl font-bold tracking-tighter mb-12 uppercase leading-none">Your Bag</h1>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-16">
+            <div class="flex-1">
+                <div id="cart-items" class="space-y-8"></div>
+                <div id="empty-cart" class="hidden text-center py-20 bg-gray-50 rounded-3xl reveal-up active">
+                    <span class="material-symbols-outlined text-5xl text-gray-300 mb-4 font-light">shopping_bag</span>
+                    <p class="text-gray-400 font-bold text-xs uppercase tracking-widest mb-6">Your archive is currently empty.</p>
+                    <a href="shop.html" class="inline-block bg-black text-white px-8 py-4 rounded-2xl text-[10px] font-bold uppercase tracking-[0.2em]">Start Exploring</a>
+                </div>
+            </div>
+
+            <aside class="w-full lg:w-96">
+                <div class="bg-gray-50 rounded-3xl p-8 sticky top-32 reveal-up active border border-gray-100">
+                    <h2 class="text-xs font-bold uppercase tracking-[0.2em] mb-8 border-b pb-4 text-gray-400">Order Summary</h2>
+                    <div class="space-y-4 mb-8">
+                        <div class="flex justify-between text-sm"><span class="text-gray-400">Subtotal</span><span id="subtotal" class="font-bold">$0.00</span></div>
+                        <div class="flex justify-between text-sm"><span class="text-gray-400">Shipping</span><span class="font-bold text-green-600">FREE</span></div>
+                    </div>
+                    <div class="flex justify-between border-t border-gray-200 pt-6 mb-8">
+                        <span class="text-xs font-bold uppercase tracking-widest">Total</span>
+                        <span id="total" class="text-2xl font-bold">$0.00</span>
+                    </div>
+
+                    <button id="checkout-btn" onclick="openCheckout()" class="w-full bg-black text-white py-5 rounded-2xl font-bold text-[10px] tracking-[0.2em] hover:bg-gray-800 transition-all uppercase mb-4 shadow-xl">
+                        Proceed to Checkout
+                    </button>
+                    <p class="text-[9px] text-gray-400 text-center uppercase tracking-widest">Secure Checkout Powered by AURA</p>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script>
+        // --- AUTH GUARD ---
+        (function() {
+            const isLoggedIn = localStorage.getItem('aura_logged_in') === 'true';
+            if (!isLoggedIn) {
+                window.location.href = 'auth.html';
+            }
+        })();
+
+        let cart = JSON.parse(localStorage.getItem('aura_cart')) || [];
+
+        // --- PROFILE UI FUNCTIONS ---
+        function updateProfileUI() {
+            const userBtn = document.getElementById('user-btn');
+            const userDisplay = document.getElementById('user-display-name');
+            const isLoggedIn = localStorage.getItem('aura_logged_in') === 'true';
+            const userData = JSON.parse(localStorage.getItem('current_user'));
+
+            if (isLoggedIn && userData) {
+                userDisplay.innerText = userData.name;
+                userDisplay.classList.remove('hidden');
+                userBtn.onclick = (e) => {
+                    e.preventDefault();
+                    toggleUserDropdown();
+                };
+            } else {
+                userDisplay.innerText = "Login";
+                userBtn.onclick = () => window.location.href = 'auth.html';
+            }
+        }
+
+        function toggleUserDropdown() {
+            const dropdown = document.getElementById('user-dropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('aura_logged_in');
+            localStorage.removeItem('current_user');
+            window.location.reload(); 
+        }
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', (e) => {
+            if (!document.getElementById('user-btn').contains(e.target)) {
+                document.getElementById('user-dropdown').classList.remove('active');
+            }
+        });
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const isHidden = menu.classList.contains('-translate-x-full');
+            if (isHidden) {
+                menu.classList.remove('-translate-x-full');
+                document.body.style.overflow = 'hidden';
+            } else {
+                menu.classList.add('-translate-x-full');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            const emptyState = document.getElementById('empty-cart');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            
+            if (cart.length === 0) {
+                container.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                checkoutBtn.disabled = true;
+                checkoutBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                document.getElementById('subtotal').innerText = `$0.00`;
+                document.getElementById('total').innerText = `$0.00`;
+                updateCartCountNav();
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            checkoutBtn.disabled = false;
+            checkoutBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            
+            container.innerHTML = cart.map((item) => {
+                // WEBP CONVERSION LOGIC FOR SRC
+                let imgSrc = item.image || item.img;
+                if (imgSrc && !imgSrc.startsWith('data:') && !imgSrc.endsWith('.webp')) {
+                    imgSrc = imgSrc.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+                }
+
+                return `
+                <div class="flex gap-6 md:gap-8 pb-8 border-b border-gray-100">
+                    <div class="w-24 h-32 md:w-32 md:h-40 shrink-0 bg-gray-100 rounded-2xl overflow-hidden">
+                        <img src="${imgSrc}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='${item.image || item.img}';">
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between py-1">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-[9px] text-gray-400 font-bold uppercase tracking-widest mb-1">${item.category || 'Archive Series'}</p>
+                                <h3 class="font-bold text-lg md:text-xl uppercase tracking-tighter">${item.name}</h3>
+                            </div>
+                            <button onclick="removeItem(${item.id})" class="text-gray-400 hover:text-black transition-colors"><span class="material-symbols-outlined text-xl">close</span></button>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center border border-gray-200 rounded-xl px-2">
+                                <button onclick="updateQty(${item.id}, -1)" class="p-2 hover:opacity-50 text-sm">-</button>
+                                <span class="w-8 text-center text-xs font-bold">${item.quantity || 1}</span>
+                                <button onclick="updateQty(${item.id}, 1)" class="p-2 hover:opacity-50 text-sm">+</button>
+                            </div>
+                            <span class="font-bold text-sm">$${(item.price * (item.quantity || 1)).toFixed(2)}</span>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+            calculateTotal();
+            updateCartCountNav();
+        }
+
+        function updateCartCountNav() {
+            const count = document.getElementById('cart-count-nav');
+            const totalItems = cart.reduce((acc, item) => acc + (item.quantity || 1), 0);
+            count.innerText = totalItems;
+        }
+
+        function openCheckout() { document.getElementById('checkout-modal').classList.remove('hidden'); }
+        function closeCheckout() { 
+            // Reset errors when closing
+            document.getElementById('email-error').style.display = 'none';
+            document.getElementById('phone-error').style.display = 'none';
+            document.getElementById('checkout-modal').classList.add('hidden'); 
+        }
+
+        function toggleCardFields(show) {
+            const fields = document.getElementById('card-fields');
+            fields.classList.toggle('hidden', !show);
+        }
+
+        function confirmOrder(event) {
+            event.preventDefault();
+
+            const emailInput = document.getElementById('email-input');
+            const phoneInput = document.getElementById('phone-input');
+            const emailError = document.getElementById('email-error');
+            const phoneError = document.getElementById('phone-error');
+
+            let isValid = true;
+
+            // Email Lowercase Check
+            if (emailInput.value !== emailInput.value.toLowerCase()) {
+                emailError.style.display = 'block';
+                isValid = false;
+            } else {
+                emailError.style.display = 'none';
+            }
+
+            // Phone 10 Digit Check
+            if (phoneInput.value.length !== 10 || isNaN(phoneInput.value)) {
+                phoneError.style.display = 'block';
+                isValid = false;
+            } else {
+                phoneError.style.display = 'none';
+            }
+
+            if (!isValid) return;
+
+            const btn = document.getElementById('confirm-btn');
+            const btnText = document.getElementById('confirm-btn-text');
+            
+            btn.disabled = true;
+            btnText.innerHTML = `<span class="spinner mr-3"></span> AUTHORIZING...`;
+            
+            setTimeout(() => {
+                document.getElementById('checkout-modal').classList.add('hidden');
+                document.getElementById('success-modal').classList.remove('hidden');
+                cart = [];
+                localStorage.setItem('aura_cart', JSON.stringify(cart));
+                renderCart();
+                btn.disabled = false;
+                btnText.innerText = "Pay Now";
+            }, 2500);
+        }
+
+        function closeModal() {
+            document.getElementById('success-modal').classList.add('hidden');
+            window.location.href = 'index.html';
+        }
+
+        function updateQty(id, delta) {
+            const item = cart.find(p => p.id === id);
+            if (item) {
+                item.quantity = Math.max(1, (item.quantity || 1) + delta);
+                localStorage.setItem('aura_cart', JSON.stringify(cart));
+                renderCart();
+            }
+        }
+
+        function removeItem(id) {
+            cart = cart.filter(p => p.id !== id);
+            localStorage.setItem('aura_cart', JSON.stringify(cart));
+            renderCart();
+        }
+
+        function calculateTotal() {
+            const subtotal = cart.reduce((acc, item) => acc + (item.price * (item.quantity || 1)), 0);
+            document.getElementById('subtotal').innerText = `$${subtotal.toFixed(2)}`;
+            document.getElementById('total').innerText = `$${subtotal.toFixed(2)}`;
+        }
+
+        window.onload = () => {
+            renderCart();
+            updateProfileUI();
+        };
+    </script>
+</body>
+</html>

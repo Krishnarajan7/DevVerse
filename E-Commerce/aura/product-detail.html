@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA | Product Detail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" rel="stylesheet"/> 
+    
+    <style>
+        .reveal-up { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-up.active { opacity: 1; transform: translateY(0); }
+        .size-btn.active { background: black; color: white; border-color: black; }
+        .zoom-container { overflow: hidden; border-radius: 2rem; }
+        .zoom-container img { transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .zoom-container:hover img { transform: scale(1.05); }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #f9f9f9; }
+        ::-webkit-scrollbar-thumb { background: #000; border-radius: 10px; }
+        .thumb-active { border: 2px solid black; opacity: 1 !important; }
+    </style>
+</head>
+<body class="bg-white text-black font-sans">
+
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div class="flex justify-between items-center px-6 md:px-16 py-5 max-w-[1440px] mx-auto">
+            <a href="index.html" class="text-2xl font-bold tracking-tighter uppercase">AURA</a>
+            <div class="flex items-center gap-8">
+                <a href="shop.html" class="text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-black transition-colors">GO TO SHOP</a>
+                <a href="cart.html" class="relative group">
+                    <span class="material-symbols-outlined text-2xl">shopping_bag</span>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-black text-white text-[9px] h-4 w-4 rounded-full flex items-center justify-center font-bold">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-[1440px] mx-auto px-6 md:px-16 pt-32 pb-20">
+        <div class="flex flex-col lg:flex-row gap-12 lg:gap-24">
+            
+            <div class="flex-1 reveal-up active space-y-6">
+                <div class="zoom-container bg-gray-50 aspect-[3/4] sticky top-32">
+                    <img id="main-img" src="" alt="Product" class="w-full h-full object-cover">
+                </div>
+                <div class="flex gap-4 justify-center">
+                    <img onclick="changeImg(this.src, this)" id="thumb-1" src="" class="w-20 h-24 object-cover rounded-xl cursor-pointer opacity-60 hover:opacity-100 transition-all thumb-active">
+                    <img onclick="changeImg(this.src, this)" id="thumb-2" src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=400" class="w-20 h-24 object-cover rounded-xl cursor-pointer opacity-60 hover:opacity-100 transition-all">
+                    <img onclick="changeImg(this.src, this)" id="thumb-3" src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=400" class="w-20 h-24 object-cover rounded-xl cursor-pointer opacity-60 hover:opacity-100 transition-all">
+                </div>
+            </div>
+
+            <div class="flex-1 space-y-12 reveal-up active" style="transition-delay: 150ms;">
+                <div>
+                    <nav class="flex gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-6">
+                        <a href="shop.html" class="hover:text-black">Shop</a> / <span id="breadcrumb-cat" class="text-black">Category</span>
+                    </nav>
+                    <div class="flex justify-between items-start">
+                        <h1 id="det-name" class="text-5xl md:text-7xl font-bold tracking-tighter uppercase leading-[0.9] mb-4">Unit Name</h1>
+                        <span class="bg-green-100 text-green-700 text-[8px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">In Stock</span>
+                    </div>
+                    <p id="det-price" class="text-3xl font-light tracking-tight text-gray-500"></p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4 border-y border-gray-100 py-8 text-center">
+                    <div><span class="material-symbols-outlined text-gray-300 mb-2">verified</span><p class="text-[8px] font-bold uppercase tracking-widest">Original</p></div>
+                    <div class="border-x border-gray-100"><span class="material-symbols-outlined text-gray-300 mb-2">eco</span><p class="text-[8px] font-bold uppercase tracking-widest">Sustain</p></div>
+                    <div><span class="material-symbols-outlined text-gray-300 mb-2">Thunderstorm</span><p class="text-[8px] font-bold uppercase tracking-widest">Tech-Dry</p></div>
+                </div>
+
+                <div class="space-y-8">
+                    <div>
+                        <div class="flex justify-between mb-4"><h3 class="text-[10px] font-bold uppercase tracking-widest">Select Size</h3></div>
+                        <div class="flex gap-3">
+                            <button onclick="selectSize(this)" class="size-btn flex-1 py-4 border border-gray-200 rounded-2xl text-xs font-bold hover:border-black transition-all">S</button>
+                            <button onclick="selectSize(this)" class="size-btn flex-1 py-4 border border-gray-200 rounded-2xl text-xs font-bold hover:border-black transition-all active">M</button>
+                            <button onclick="selectSize(this)" class="size-btn flex-1 py-4 border border-gray-200 rounded-2xl text-xs font-bold hover:border-black transition-all">L</button>
+                            <button onclick="selectSize(this)" class="size-btn flex-1 py-4 border border-gray-200 rounded-2xl text-xs font-bold hover:border-black transition-all">XL</button>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <div class="flex items-center border border-gray-200 rounded-3xl px-4">
+                            <button onclick="updateQty(-1)" class="material-symbols-outlined p-2 text-gray-400 hover:text-black">remove</button>
+                            <span id="qty-count" class="w-12 text-center font-bold text-sm">1</span>
+                            <button onclick="updateQty(1)" class="material-symbols-outlined p-2 text-gray-400 hover:text-black">add</button>
+                        </div>
+                        <button id="add-to-bag-btn" onclick="addToBag()" class="flex-1 bg-black text-white py-6 rounded-3xl font-bold text-[11px] tracking-[0.3em] hover:scale-[1.02] active:scale-[0.98] transition-all uppercase shadow-xl flex items-center justify-center gap-4">
+                            Add To Bag — <span id="btn-price"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-4 pt-4">
+                    <details class="group border-b border-gray-100 pb-4" open>
+                        <summary class="flex justify-between items-center cursor-pointer list-none">
+                            <span class="text-[10px] font-bold uppercase tracking-widest">Product Description</span>
+                            <span class="material-symbols-outlined text-gray-400 group-open:rotate-180 transition-transform">expand_more</span>
+                        </summary>
+                        <p class="text-sm text-gray-500 leading-relaxed mt-4">The AURA archive unit is engineered for extreme utility and urban aesthetics. High-performance construction ensures durability in all conditions.</p>
+                    </details>
+                </div>
+            </div>
+        </div>
+
+        <section class="mt-40 border-t border-gray-100 pt-20">
+            <h2 class="text-[10px] font-bold uppercase tracking-[0.4em] mb-12 text-center text-gray-400">Recommended Units</h2>
+            <div id="related-grid" class="grid grid-cols-2 md:grid-cols-4 gap-8"></div>
+        </section>
+    </main>
+
+    <script>
+        let currentItem = null;
+        let quantity = 1;
+
+        // 1. DYNAMIC LOAD: URL parameters moolama id-ya eduthu details kaatum
+        function loadProduct() {
+            const params = new URLSearchParams(window.location.search);
+            const productId = params.get('id');
+
+            // Index page-la save panna data-va edukurom
+            const savedData = localStorage.getItem('selectedProduct');
+            
+            if (savedData) {
+                currentItem = JSON.parse(savedData);
+                
+                // Update UI with the clicked product's details
+                document.getElementById('det-name').innerText = currentItem.name;
+                document.getElementById('det-price').innerText = `$${currentItem.price}`;
+                document.getElementById('btn-price').innerText = `$${currentItem.price}`;
+                document.getElementById('breadcrumb-cat').innerText = currentItem.category;
+                document.getElementById('main-img').src = currentItem.img;
+                document.getElementById('thumb-1').src = currentItem.img;
+                
+                renderRelated();
+            } else {
+                // Oru velai direct-a page vandha Index-ku anuppidum
+                window.location.href = "index.html";
+            }
+            updateCartUI();
+        }
+
+        function changeImg(src, el) {
+            document.getElementById('main-img').src = src;
+            document.querySelectorAll('.flex.gap-4 img').forEach(img => img.classList.remove('thumb-active'));
+            el.classList.add('thumb-active');
+        }
+
+        function updateQty(val) {
+            quantity = Math.max(1, quantity + val);
+            document.getElementById('qty-count').innerText = quantity;
+        }
+
+        function selectSize(btn) {
+            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function renderRelated() {
+            // Mock data for recommendations
+            const relatedGrid = document.getElementById('related-grid');
+            const items = [
+                { id: 2, name: "Knit Tech Trouser", price: 245, category: "Bottoms", img: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=400" },
+                { id: 4, name: "Commuter Pack", price: 290, category: "Accessories", img: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=400" }
+            ];
+            
+            relatedGrid.innerHTML = items.map(p => `
+                <div class="group cursor-pointer">
+                    <div class="aspect-[3/4] overflow-hidden rounded-2xl bg-gray-50 mb-4">
+                        <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <p class="text-[8px] font-bold uppercase tracking-widest text-gray-400 mb-1">${p.category}</p>
+                    <h4 class="text-xs font-bold uppercase tracking-tight">${p.name}</h4>
+                    <p class="text-[10px] text-gray-500 mt-1">$${p.price}</p>
+                </div>
+            `).join('');
+        }
+
+        function addToBag() {
+            if(!currentItem) return;
+            let cart = JSON.parse(localStorage.getItem('aura_cart')) || [];
+            cart.push({...currentItem, quantity: quantity});
+            localStorage.setItem('aura_cart', JSON.stringify(cart));
+            updateCartUI();
+
+            const btn = document.getElementById('add-to-bag-btn');
+            btn.innerHTML = "DEPLOYED TO BAG";
+            btn.style.backgroundColor = "#22c55e";
+            setTimeout(() => {
+                btn.innerHTML = `Add To Bag — $${currentItem.price}`;
+                btn.style.backgroundColor = "black";
+            }, 2000);
+        }
+
+        function updateCartUI() {
+            const cart = JSON.parse(localStorage.getItem('aura_cart')) || [];
+            document.getElementById('cart-count').innerText = cart.length;
+        }
+
+        window.onload = loadProduct;
+    </script>
+</body>
+</html>
