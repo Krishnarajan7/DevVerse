@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&display=swap');
+
+body {
+  font-family: 'Plus+Jakarta+Sans', sans-serif;
+  letter-spacing: -0.02em; /* Tight kerning for premium feel */
+}
+
+:root {
+  --tnWhite: #FFFFFF !important;
+  --tnBlack: #1D1D1F !important; /* Apple's Deep Gray/Black */
+  --tnGold: #AF8F2C !important;  /* Muted Luxury Gold */
+  --tnLightGray: #F5F5F7 !important;
+}
+
+/* Base Styles */
+html, body {
+  background-color: var(--tnWhite) !important;
+  color: var(--tnBlack) !important;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* Premium White Card */
+.premium-card {
+  background: #FFFFFF !important;
+  border: 1px solid #E5E5E7 !important;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.premium-card:hover {
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  transform: translateY(-5px);
+  border-color: var(--tnGold) !important;
+}
+
+/* Primary Button */
+.btn-premium {
+  background-color: var(--tnBlack) !important;
+  color: #FFFFFF !important;
+  padding: 12px 24px;
+  border-radius: 40px;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.btn-premium:hover {
+  opacity: 0.8;
+}
