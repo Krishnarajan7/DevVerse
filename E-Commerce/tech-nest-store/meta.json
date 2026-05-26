@@ -1,0 +1,9 @@
+{
+  "title": "Tech Nest Store",
+  "description": "A modern, responsive e-commerce storefront built with React and Vite.",
+  "image": "screenshot.png",
+  "tech": ["React", "Vite", "Tailwind CSS"],
+  "category": "E-Commerce",
+  "author": "Arulbarath-30",
+  "liveDemo": "" 
+}
