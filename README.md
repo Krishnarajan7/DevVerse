@@ -288,4 +288,4 @@ If you face issues:
 ---
 
 > **Grow. Build. Contribute.**
-> Together, we make the web a better place. 🤍
+> Together, we make the web a better place. ✌🏻
